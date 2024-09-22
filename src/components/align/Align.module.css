@@ -1,0 +1,24 @@
+.align {
+  display: flex;
+
+  & > * {
+    padding: 0.2em 1em;
+  }
+  &.auto > * {
+    width: auto;
+  }
+  &.half > * {
+    width: 50%;
+  }
+  &.full > * {
+    width: 100%;
+  }
+}
+
+.center {
+  justify-content: center;
+}
+
+.right {
+  justify-content: end;
+}

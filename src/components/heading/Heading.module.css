@@ -1,0 +1,24 @@
+.heading {
+  margin-bottom: 2em;
+  .title {
+    font-size: var(--h2-font-size);
+    font-weight: 600;
+    &.fz600 {
+      font-size: var(--font-size-600);
+    }
+    &.fz700 {
+      font-size: var(--font-size-700);
+    }
+    &.fz800 {
+      font-size: var(--font-size-800);
+    }
+  }
+
+  &.right {
+    text-align: right;
+  }
+
+  &.center {
+    text-align: center;
+  }
+}

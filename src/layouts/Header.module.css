@@ -1,0 +1,32 @@
+.header {
+  padding: var(--padding-layouts) 0;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.logo {
+  margin: -0.5em 0;
+}
+/* .sorting {} */
+.link {
+  margin: auto;
+  display: flex;
+  gap: 2em;
+  font-weight: 500;
+
+  & > a {
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}

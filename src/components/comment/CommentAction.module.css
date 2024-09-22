@@ -1,0 +1,80 @@
+.comment {
+  .top {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-gray-300);
+    font-size: var(--font-size-100);
+    padding: 0.7rem 0;
+    & > h3 {
+      font-size: inherit;
+      font-weight: 400;
+    }
+
+    .sorting {
+      display: flex;
+      gap: 10px;
+
+      & input[type='radio'] {
+        position: absolute;
+        inset: 0;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+
+        &:checked + label {
+          color: var(--color-gray-900);
+          font-weight: 500;
+        }
+      }
+
+      & label {
+        color: var(--color-gray-600);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .list {
+    & > li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: var(--font-size-100);
+      padding: 0.7rem 0;
+    }
+
+    .content {
+      flex: 0 1 100%;
+      .info {
+        display: flex;
+        flex-direction: column;
+        font-size: var(--font-size-00);
+
+        .name {
+          font-weight: 500;
+        }
+
+        .date {
+          color: var(--color-gray-600);
+        }
+      }
+    }
+  }
+}
+
+.form {
+  .inputs {
+    & > div {
+      flex: 0 1 100%;
+    }
+
+    & button {
+      flex: 0 1 60px;
+      height: 45px;
+      background-color: var(--color-gray-900);
+      border-radius: var(--border-radius);
+      color: var(--color-gray-00);
+      cursor: pointer;
+    }
+  }
+}
