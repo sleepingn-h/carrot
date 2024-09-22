@@ -26,7 +26,7 @@ const Header = () => {
           {/* <Link href={'/around-me'}>내주변</Link> */}
         </nav>
         <div className={styles.flex}>
-          {isLoggedin && (
+          {uid && (
             <Link href={'/my'}>
               <HiOutlineUser className={styles.icons} size={24} />
               <span className='sr-only'>나의 당근</span>
