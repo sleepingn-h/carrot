@@ -33,7 +33,7 @@ const GoogleMapPin = ({ area, map }: GoogleMapPinProps) => {
     };
   }, [area, map, router]);
 
-  return <></>;
+  return <span></span>;
 };
 
 export default GoogleMapPin;
