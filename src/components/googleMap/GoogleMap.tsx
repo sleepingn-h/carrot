@@ -11,7 +11,7 @@ const GoogleMap = () => {
   const [currentLocation, setCurrentLocation] = useState<GeoArticle | null>(null);
   //{lat: 37.494, lng: 126.856}
   const [googleMap, setGoogleMap] = useState<google.maps.Map | null>(null);
-  const { dispatch, SET_REGISTER_AREA, aroundMe } = useAroundMe(googleMap);
+  const { dispatch, SET_REGISTER_AREA, aroundMe, area } = useAroundMe(googleMap);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -49,7 +49,8 @@ const GoogleMap = () => {
   }, [currentLocation]);
 
   useEffect(() => {
-    router.refresh();
+    console.log(area);
+    area && router.refresh();
     if (googleMap !== null) {
       googleMap.addListener('idle', () => {
         const areas = aroundMe();
