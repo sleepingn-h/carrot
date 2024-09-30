@@ -32,7 +32,7 @@ export default function GoogleMapMarker({
   }, [ref, map, position, area]);
 
   if (area === undefined) {
-    return <></>;
+    return <div></div>;
   }
 
   return area.map((a) => (
