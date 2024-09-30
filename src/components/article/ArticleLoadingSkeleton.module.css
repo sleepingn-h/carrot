@@ -1,0 +1,103 @@
+.etc {
+  background-color: var(--color-gray-200);
+  border-radius: var(--border-radius);
+  color: var(--color-gray-200);
+  font-size: var(--font-size-00);
+  width: 70px;
+}
+
+.list {
+  border-bottom: 1px solid var(--color-gray-300);
+  color: var(--color-gray-200);
+  padding: 1rem 0;
+
+  .chips {
+    background-color: var(--color-gray-200);
+    border-radius: var(--border-radius);
+    color: var(--color-gray-200);
+    font-size: var(--font-size-00);
+    padding: 0.1rem 0.5rem;
+    width: 70px;
+  }
+  .item-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 0 0 100%;
+    margin-top: 0.3rem;
+  }
+
+  .title {
+    background-color: var(--color-gray-200);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-200);
+    width: 70%;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .comment {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    background-color: var(--color-gray-200);
+    border-radius: var(--border-radius);
+    color: var(--color-gray-200);
+    font-size: var(--font-size-00);
+    width: 20px;
+  }
+}
+
+.article {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+
+  .item {
+    flex: 0 1 calc((100% - 6em) / 3);
+    max-width: calc((100% - 6em) / 3);
+    .link {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+
+    .image {
+      background-color: var(--color-gray-200);
+      border-radius: var(--border-radius);
+      padding-top: 100%;
+    }
+
+    .item-desc {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 0 0 100%;
+    }
+
+    .title {
+      font-size: var(--font-size-100);
+      background-color: var(--color-gray-200);
+      border-radius: var(--border-radius);
+      color: var(--color-gray-200);
+    }
+
+    .price {
+      background-color: var(--color-gray-200);
+      border-radius: var(--border-radius);
+      color: var(--color-gray-200);
+    }
+
+    .etc {
+      background-color: var(--color-gray-200);
+      border-radius: var(--border-radius);
+      color: var(--color-gray-200);
+    }
+  }
+}

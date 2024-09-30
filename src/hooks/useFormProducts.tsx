@@ -1,7 +1,7 @@
 import type { SelectOptions } from '@/components/select/Select';
 import type { FetchArticle, SimpleArticle } from '@/model/article';
 import { useCallback, useEffect, useState } from 'react';
-import { useAuthContext } from '@/context/AuthContext';
+import useAuth from './useAuth';
 import { addNewProduct, editProduct } from '@/lib/firebase/firebase-database';
 import { addArticleImage, deleteProductImage } from '@/lib/firebase/firebase-storage';
 
@@ -21,7 +21,7 @@ export const categories: SelectOptions[] = [
 ];
 
 export default function useFormProducts<T>(data: T) {
-  const { uid } = useAuthContext();
+  const { uid } = useAuth();
   const [products, setProducts] = useState<T>({ ...data, uid });
   const [uploadProgress, setUploadProgress] = useState(0);
 

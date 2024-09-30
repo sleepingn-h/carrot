@@ -1,31 +1,39 @@
-import { ReactNode, forwardRef, useEffect } from 'react';
+import { Aroundme } from '@/hooks/useAroundMe';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
 
-interface GoogleMapPinProps {
-  children: ReactNode;
-}
+type GoogleMapPinProps = {
+  area: Aroundme;
+  map: google.maps.Map;
+};
 
-const GoogleMapPin = forwardRef<HTMLDivElement, GoogleMapPinProps>(function GoogleMapPin(
-  { children },
-  ref
-) {
+const GoogleMapPin = ({ area, map }: GoogleMapPinProps) => {
+  const router = useRouter();
+
   useEffect(() => {
-    if (typeof ref !== 'function') {
-      if (ref?.current) {
-        const initPin = new google.maps.marker.PinElement({
-          background: '#db4455',
-          borderColor: '#881824',
-        });
-        ref.current.appendChild(initPin.element);
+    const { lat, lng } = area.geocode;
+    const container = document.createElement('div');
+    const markerInstance = new google.maps.marker.AdvancedMarkerElement({
+      position: { lat, lng },
+      map: map,
+      content: container,
+    });
 
-        return () => {
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-          ref.current?.removeChild(initPin.element);
-        };
-      }
-    }
-  }, [ref]);
+    createRoot(container).render(
+      <div style={{ backgroundColor: 'red', width: '10px', height: '10px', borderRadius: '50%' }} />
+    );
 
-  return <div ref={ref}>{children}</div>;
-});
+    markerInstance.addListener('click', () => {
+      router.push(`/fleamarket/articles/${area.id}`);
+    });
+
+    return () => {
+      markerInstance.map = null;
+    };
+  }, [area, map, router]);
+
+  return <></>;
+};
 
 export default GoogleMapPin;

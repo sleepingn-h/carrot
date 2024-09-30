@@ -33,7 +33,7 @@ const useAuth = () => {
 
   const user = useMemo(() => userState, [userState]);
 
-  return { ...user };
+  return { ...user, setUserState };
 };
 
 export default useAuth;

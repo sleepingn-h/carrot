@@ -44,8 +44,12 @@ export function loginGoogle({ successHandler }: LoginWithGoogle) {
     .catch((error) => console.error('login-google', error));
 }
 
-export function logout() {
+export function logout(handler: () => void) {
   signOut(auth) //
+    .then(() => {
+      handler();
+      console.log('@@@');
+    })
     .catch((error) => console.error('logout', error));
 }
 

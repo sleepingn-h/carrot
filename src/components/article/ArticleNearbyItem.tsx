@@ -5,7 +5,7 @@ import Chips from '../chips/Chips';
 import { FaRegComment } from 'react-icons/fa';
 import styles from './Article.module.css';
 
-const ArticleNearbyItem = ({ key, ...nearby }: { key: string } & FetchNearby) => {
+const ArticleNearbyItem = ({ ...nearby }) => {
   const { id, category, title, createdAt, area, comments } = nearby;
 
   return (

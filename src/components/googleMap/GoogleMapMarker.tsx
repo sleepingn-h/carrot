@@ -1,8 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { type MutableRefObject, useEffect, useRef } from 'react';
+import useAroundMe, { Aroundme } from '@/hooks/useAroundMe';
+import { GeoArticle } from '@/model/article';
 import GoogleMapPin from './GoogleMapPin';
 import styles from './GoogleMap.module.css';
 
-function GoogleMapMarker({
+export default function GoogleMapMarker({
   map,
   position,
 }: {
@@ -10,6 +12,7 @@ function GoogleMapMarker({
   position: { lat: number; lng: number };
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const { area } = useAroundMe(map);
 
   useEffect(() => {
     if (ref.current) {
@@ -20,17 +23,40 @@ function GoogleMapMarker({
         content: ref.current,
       });
 
+      setMarkers(map, area, ref);
+
       return () => {
         initMarker.map = null;
       };
     }
-  }, [ref, map, position]);
+  }, [ref, map, position, area]);
 
-  return (
-    <div className={styles.marker}>
-      <GoogleMapPin ref={ref}>마커</GoogleMapPin>
+  if (area === undefined) {
+    return <></>;
+  }
+
+  return area.map((a) => (
+    <div key={a.id} className={styles.marker}>
+      <GoogleMapPin area={a} map={map} />
     </div>
-  );
+  ));
 }
 
-export default GoogleMapMarker;
+function setMarkers(
+  map: google.maps.Map,
+  areas: Aroundme[],
+  ref: MutableRefObject<HTMLDivElement>
+) {
+  for (let i = 0; i < areas.length; i++) {
+    const area = areas[i];
+
+    new google.maps.marker.AdvancedMarkerElement({
+      position: { lat: area.geocode.lat, lng: area.geocode.lng },
+      map,
+      // title: '마커',
+      content: ref.current,
+      // title: beach[0],
+      // zIndex: beach[3],
+    });
+  }
+}

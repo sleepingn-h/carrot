@@ -43,5 +43,5 @@ export type AuthLogin = {
 };
 
 export type AuthLogout = {
-  logout: () => void;
+  logout: (handler: () => void) => void;
 };

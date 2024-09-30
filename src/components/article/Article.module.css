@@ -7,17 +7,16 @@
     flex-direction: column;
     gap: 0;
   }
-
-  .write {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    border-radius: 999px;
-    margin: 1rem;
-    width: auto;
-    height: auto;
-    padding: 0.5rem 1rem;
-  }
+}
+.write {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border-radius: 999px;
+  margin: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
 }
 
 .image {
@@ -195,4 +194,8 @@
   .desc {
     margin: 2rem 0;
   }
+}
+
+.more {
+  margin-top: 2rem;
 }

@@ -8,6 +8,7 @@ import { validateSignupFormData } from '@/lib/signup-form';
 import Inputs from '@/components/input/Input';
 import Trigger from '@/components/trigger/Trigger';
 import styles from '../Auth.module.css';
+import Align from '@/components/align/Align';
 //https://nextjs.org/docs/app/building-your-application/authentication
 
 const INITIAL_FORM_DATA: SignupFormData = {
@@ -97,7 +98,7 @@ const RegisterClient = () => {
           <Inputs.Label>비밀번호 확인</Inputs.Label>
           <Inputs.Input
             type='password'
-            placeholder='비밀번호 확인'
+            placeholder='12341234'
             value={formData.cPassword}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: FocusEvent<HTMLInputElement>) => handleBlur(e)}
@@ -105,9 +106,11 @@ const RegisterClient = () => {
           />
           {errors.cPassword && <Inputs.Errors errorMessages={errors.cPassword} />}
         </Inputs.Root>
-        <Trigger type='submit' disabled={isPending}>
-          {isPending ? '제출중...' : '제출'}
-        </Trigger>
+        <Align>
+          <Trigger type='submit' disabled={isPending}>
+            {isPending ? '제출중...' : '제출'}
+          </Trigger>
+        </Align>
       </form>
     </section>
   );

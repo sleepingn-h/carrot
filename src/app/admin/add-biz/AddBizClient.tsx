@@ -3,15 +3,15 @@
 import type { SimpleBizArticle } from '@/model/article';
 import { ChangeEvent, FormEvent, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
+import useAuth from '@/hooks/useAuth';
 import useFormArticle, { categories } from '@/hooks/useFormArticle';
 import Heading from '@/components/heading/Heading';
 import Inputs from '@/components/input/Input';
+import Select from '@/components/select/Select';
 import Trigger from '@/components/trigger/Trigger';
 import Align from '@/components/align/Align';
 import { HiOutlineInbox } from 'react-icons/hi';
 import styles from '../../fleamarket/fleamarket.module.css';
-import { useAuthContext } from '@/context/AuthContext';
-import Select from '@/components/select/Select';
 
 const INITIAL_ARTICLE_DATA: SimpleBizArticle = {
   __type: 'biz',
@@ -30,7 +30,7 @@ const INITIAL_ARTICLE_DATA: SimpleBizArticle = {
 
 const AddBizClient = () => {
   const router = useRouter();
-  const { uid, userName, photoURL } = useAuthContext();
+  const { uid, userName, photoURL } = useAuth();
   const { article, setArticle, uploadProgress, downloaImagedURL, added } =
     useFormArticle<SimpleBizArticle>({
       ...INITIAL_ARTICLE_DATA,

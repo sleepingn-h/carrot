@@ -3,7 +3,7 @@
 import type { Nearby } from '@/model/article';
 import { ChangeEvent, FormEvent, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthContext } from '@/context/AuthContext';
+import useAuth from '@/hooks/useAuth';
 import useFormArticle from '@/hooks/useFormArticle';
 import Heading from '@/components/heading/Heading';
 import Inputs from '@/components/input/Input';
@@ -60,7 +60,7 @@ const INITIAL_NEARBY_DATA: Nearby = {
 
 const AddNearbyClient = () => {
   const router = useRouter();
-  const { uid, userName, photoURL } = useAuthContext();
+  const { uid, userName, photoURL } = useAuth();
   const { article, setArticle, added } = useFormArticle<Nearby>({
     ...INITIAL_NEARBY_DATA,
     user: { userID: uid, userName, photoURL },

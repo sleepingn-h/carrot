@@ -6,12 +6,14 @@ import formatDate from '@/utils/formatDate';
 import CommentForm from './CommentForm';
 import styles from './CommentAction.module.css';
 import ArticleUserProfile from '../article/ArticleUserProfile';
+import useAuth from '@/hooks/useAuth';
 
 type Props = {
   comments: Comment[];
   onChangeComments: (comment: Comment) => void;
 };
 const CommentAction = ({ comments, onChangeComments }: Props) => {
+  const { uid } = useAuth();
   const [sort, setSort] = useState('sorting-earliest');
   const dispatch = useDispatch();
   const filteredComments = useSelector(selectFilteredComments);
@@ -72,7 +74,7 @@ const CommentAction = ({ comments, onChangeComments }: Props) => {
           ))}
         </ul>
       )}
-      <CommentForm onChangeComments={onChangeComments} />
+      {uid && <CommentForm onChangeComments={onChangeComments} />}
     </div>
   );
 };

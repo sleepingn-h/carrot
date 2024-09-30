@@ -3,7 +3,7 @@
 import type { SimpleArticle } from '@/model/article';
 import { ChangeEvent, FormEvent, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthContext } from '@/context/AuthContext';
+import useAuth from '@/hooks/useAuth';
 import useFormArticle, { categories } from '@/hooks/useFormArticle';
 import Heading from '@/components/heading/Heading';
 import Inputs from '@/components/input/Input';
@@ -31,7 +31,7 @@ const INITIAL_PRODUCTS_DATA: SimpleArticle = {
 
 const AddProductClient = () => {
   const router = useRouter();
-  const { uid, userName, photoURL } = useAuthContext();
+  const { uid, userName, photoURL } = useAuth();
   const { article, setArticle, uploadProgress, downloaImagedURL, added } =
     useFormArticle<SimpleArticle>({
       ...INITIAL_PRODUCTS_DATA,

@@ -1,16 +1,25 @@
 'use client';
 
 import { useAuthContext } from '@/context/AuthContext';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '@/assets/logo.svg';
-import { HiOutlinePlusCircle, HiOutlineSearch, HiOutlineUser } from 'react-icons/hi';
+import useAuth from '@/hooks/useAuth';
+import { HiOutlinePlusCircle, HiOutlineUser } from 'react-icons/hi';
 import Trigger from '@/components/trigger/Trigger';
 import styles from './Header.module.css';
 
 const Header = () => {
-  const { uid, logout, bizUser } = useAuthContext();
-  const isLoggedin = uid !== null;
+  const router = useRouter();
+  const pathname = usePathname().split('/');
+  const { uid, setUserState, bizUser } = useAuth();
+  const { logout } = useAuthContext();
+
+  const loggedOut = () => {
+    setUserState(null);
+    router.push('/');
+  };
 
   return (
     <header className={styles.header}>
@@ -21,9 +30,15 @@ const Header = () => {
           </Link>
         </div>
         <nav className={styles.link}>
-          <Link href={'/fleamarket'}>중고거래</Link>
-          <Link href={'/nearby'}>동네생활</Link>
-          {/* <Link href={'/around-me'}>내주변</Link> */}
+          <Link className={pathname[1] === 'fleamarket' ? styles.active : ''} href={'/fleamarket'}>
+            중고거래
+          </Link>
+          <Link className={pathname[1] === 'nearby' ? styles.active : ''} href={'/nearby'}>
+            동네생활
+          </Link>
+          <Link className={pathname[1] === 'around-me' ? styles.active : ''} href={'/around-me'}>
+            내주변
+          </Link>
         </nav>
         <div className={styles.flex}>
           {uid && (
@@ -43,7 +58,7 @@ const Header = () => {
               로그인
             </Trigger>
           ) : (
-            <Trigger size='sm' onClick={logout} bgColor='secondary'>
+            <Trigger size='sm' onClick={() => logout(loggedOut)} bgColor='secondary'>
               로그아웃
             </Trigger>
           )}

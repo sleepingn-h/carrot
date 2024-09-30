@@ -1,16 +1,19 @@
+import type { GeoArticle } from '@/model/article';
 import { useEffect, useRef, useState } from 'react';
 import GoogleMapMarker from './GoogleMapMarker';
 import styles from './GoogleMap.module.css';
+import useAroundMe from '@/hooks/useAroundMe';
 
 const GoogleMap = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const [currentLocation, setCurrentLocation] = useState({ lat: null, lng: null });
-  const [googleMap, setGoogleMap] = useState<google.maps.Map>();
+  const [currentLocation, setCurrentLocation] = useState<GeoArticle | null>(null);
+  //{lat: 37.494, lng: 126.856}
+  const [googleMap, setGoogleMap] = useState<google.maps.Map | null>(null);
+  const { dispatch, SET_REGISTER_AREA, aroundMe } = useAroundMe(googleMap);
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
-        console.log(position);
         setCurrentLocation({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
@@ -42,6 +45,18 @@ const GoogleMap = () => {
       setGoogleMap(initialMap);
     }
   }, [currentLocation]);
+
+  useEffect(() => {
+    if (googleMap !== null) {
+      googleMap.addListener('idle', () => {
+        const areas = aroundMe();
+
+        console.log(areas);
+        dispatch(SET_REGISTER_AREA({ areas }));
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [aroundMe, dispatch, googleMap]);
 
   return (
     <div ref={ref} id='map' className={styles['google-map']}>

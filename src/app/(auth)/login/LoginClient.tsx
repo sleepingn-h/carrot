@@ -55,7 +55,7 @@ const LoginClient = () => {
         <Inputs.Root id='email' required>
           <Inputs.Label>이메일</Inputs.Label>
           <Inputs.Input
-            placeholder='email@example.com'
+            placeholder='james@gmail.com'
             value={formData.email}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             type='email'
