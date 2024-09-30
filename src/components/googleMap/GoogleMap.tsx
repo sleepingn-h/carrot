@@ -14,7 +14,7 @@ const GoogleMap = () => {
   const { dispatch, SET_REGISTER_AREA, aroundMe, area } = useAroundMe(googleMap);
 
   useEffect(() => {
-    return router.push('/around-me');
+    router.push('/around-me');
   }, [router]);
   useEffect(() => {
     if (navigator.geolocation) {
