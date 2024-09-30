@@ -1,10 +1,12 @@
 import type { GeoArticle } from '@/model/article';
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import useAroundMe from '@/hooks/useAroundMe';
 import GoogleMapMarker from './GoogleMapMarker';
 import styles from './GoogleMap.module.css';
-import useAroundMe from '@/hooks/useAroundMe';
 
 const GoogleMap = () => {
+  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
   const [currentLocation, setCurrentLocation] = useState<GeoArticle | null>(null);
   //{lat: 37.494, lng: 126.856}
@@ -47,11 +49,11 @@ const GoogleMap = () => {
   }, [currentLocation]);
 
   useEffect(() => {
+    router.refresh();
     if (googleMap !== null) {
       googleMap.addListener('idle', () => {
         const areas = aroundMe();
 
-        console.log(areas);
         dispatch(SET_REGISTER_AREA({ areas }));
       });
     }
