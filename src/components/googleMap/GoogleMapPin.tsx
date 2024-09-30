@@ -26,6 +26,7 @@ const GoogleMapPin = ({ area, map }: GoogleMapPinProps) => {
 
     markerInstance.addListener('click', () => {
       router.push(`/fleamarket/articles/${area.id}`);
+      router.refresh();
     });
 
     return () => {
@@ -33,7 +34,7 @@ const GoogleMapPin = ({ area, map }: GoogleMapPinProps) => {
     };
   }, [area, map, router]);
 
-  return <span></span>;
+  return <></>;
 };
 
 export default GoogleMapPin;
