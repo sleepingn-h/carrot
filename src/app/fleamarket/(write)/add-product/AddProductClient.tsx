@@ -2,7 +2,7 @@
 
 import type { SimpleArticle } from '@/model/article';
 import { ChangeEvent, FormEvent, useState, useTransition } from 'react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import useFormArticle, { categories } from '@/hooks/useFormArticle';
 import Heading from '@/components/heading/Heading';
@@ -39,6 +39,11 @@ const AddProductClient = () => {
     });
   const [isPending, startTransition] = useTransition();
   const [inputImageURL, setInputImageURL] = useState('');
+
+  if (!uid) {
+    redirect('/');
+  }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setArticle({

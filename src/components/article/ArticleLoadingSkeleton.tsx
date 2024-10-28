@@ -7,13 +7,11 @@ type Props = {
 };
 
 const ArticleLoadingSkeleton = ({ ...props }: Props) => {
-  const { type, articles } = props;
-
-  switch (type) {
+  switch (props.type) {
     case 'article':
       return (
         <div className={styles.article}>
-          {articles.map((article) => (
+          {props.articles?.map((article) => (
             <article className={styles.item} key={article.id}>
               <div className={styles.link}>
                 <div className={styles.image} />
