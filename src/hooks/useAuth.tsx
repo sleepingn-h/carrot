@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { onUserIdTokenChanged } from '@/lib/firebase/firebase-auth';
 
 const useAuth = () => {
-  const [userState, setUserState] = useState<AuthProps | null>();
+  const [userState, setUserState] = useState<AuthProps | null>(null);
   const getUserState = useCallback(async () => {
     const user: AuthProps = await onUserIdTokenChanged();
 
