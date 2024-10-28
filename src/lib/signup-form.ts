@@ -51,7 +51,6 @@ export const SignupFormSchema = z
 
 export const validateEachForm = (formData: SignupFormData) => {
   const validation = SignupFormSchema.parse(formData);
-  console.log(validation);
 };
 
 export const validateSignupFormData = (formData: SignupFormData): ValidateSignupFormData => {

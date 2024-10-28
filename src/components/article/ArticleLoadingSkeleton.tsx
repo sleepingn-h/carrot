@@ -1,23 +1,27 @@
+import { FetchArticle, FetchBizArticle } from '@/model/article';
 import styles from './ArticleLoadingSkeleton.module.css';
 
 type Props = {
   type: 'article' | 'nearby';
+  articles?: (FetchArticle | FetchBizArticle)[];
 };
 
 const ArticleLoadingSkeleton = ({ ...props }: Props) => {
-  switch (props.type) {
+  const { type, articles } = props;
+
+  switch (type) {
     case 'article':
       return (
         <div className={styles.article}>
-          {[...new Array(10)].map((_, index) => (
-            <article className={styles.item} key={`article${index}`}>
+          {articles.map((article) => (
+            <article className={styles.item} key={article.id}>
               <div className={styles.link}>
                 <div className={styles.image} />
                 <div className={styles['item-desc']}>
-                  <div className={styles.title}>제목</div>
-                  <div className={styles.price}>가격</div>
+                  <div className={styles.title}>{article.name}</div>
+                  <div className={styles.price}>{article.price}</div>
                   <div className={styles.etc}>
-                    <span>Etc</span>
+                    <span>{article.area}</span>
                   </div>
                 </div>
               </div>

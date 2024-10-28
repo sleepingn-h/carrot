@@ -53,10 +53,7 @@ function setMarkers(
     new google.maps.marker.AdvancedMarkerElement({
       position: { lat: area.geocode.lat, lng: area.geocode.lng },
       map,
-      // title: '마커',
       content: ref.current,
-      // title: beach[0],
-      // zIndex: beach[3],
     });
   }
 }

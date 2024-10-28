@@ -48,7 +48,6 @@ export function logout(handler: () => void) {
   signOut(auth) //
     .then(() => {
       handler();
-      console.log('@@@');
     })
     .catch((error) => console.error('logout', error));
 }

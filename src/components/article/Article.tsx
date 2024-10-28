@@ -3,18 +3,17 @@
 import type { FetchArticle, FetchBizArticle } from '@/model/article';
 import { useEffect, useMemo, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
+import useArticleState from '@/hooks/useArticleState';
 import { getAllCollections } from '@/lib/firebase/firebase-database';
+import { GoPlus } from 'react-icons/go';
+import ArticleLoadingSkeleton from './ArticleLoadingSkeleton';
 import ArticleBizItem from './ArticleBizItem';
 import ArticleItem from './ArticleItem';
 import Trigger from '../trigger/Trigger';
-import { GoPlus } from 'react-icons/go';
-import styles from './Article.module.css';
-import useArticleState from '@/hooks/useArticleState';
 import Align from '../align/Align';
-import ArticleLoadingSkeleton from './ArticleLoadingSkeleton';
-import useAroundMe from '@/hooks/useAroundMe';
+import styles from './Article.module.css';
 
-const Article = () => {
+const Article = ({ articles }: { articles: (FetchArticle | FetchBizArticle)[] }) => {
   const { token } = useAuth();
   const [data, setData] = useState([]);
   const [currentArticle, _] = useState(1);
@@ -22,7 +21,7 @@ const Article = () => {
   const [isLastArticle, setIsLastArticle] = useState(false);
   const { dispatch, STORE_PRODUCTS, article } = useArticleState();
 
-  const articles = useMemo(
+  const articlesMemo = useMemo(
     async () =>
       await Promise.all([
         getAllCollections<FetchArticle>('products'),
@@ -56,7 +55,8 @@ const Article = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, dispatch]);
 
-  if (article.length === 0) return <ArticleLoadingSkeleton type='article' />;
+  if (currentArticles.length === 0)
+    return <ArticleLoadingSkeleton articles={articles} type='article' />;
 
   return (
     <>

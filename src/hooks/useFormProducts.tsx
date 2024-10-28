@@ -45,7 +45,6 @@ export default function useFormProducts<T>(data: T) {
 
   useEffect(() => {
     setProducts(products);
-    console.log(products);
   }, [products]);
 
   return {
